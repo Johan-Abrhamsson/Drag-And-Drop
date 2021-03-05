@@ -3,12 +3,23 @@ var turn = true;
 
 const item = document.getElementById('item');
 const item2 = document.getElementById('item2');
-if (turn == true){
+
+
 item.addEventListener('dragstart', dragStart);
-}
-else{
 item2.addEventListener('dragstart', dragStart);
+
+function evalTurn() {
+
+    if (turn) {
+        item.setAttribute("draggable", "true");
+        item2.setAttribute("draggable", "false");
+    } else {
+        item.setAttribute("draggable", "false");
+        item2.setAttribute("draggable", "true");
+    }
+
 }
+
 console.log(item);
 console.log(item2);
 function dragStart(e) {
@@ -53,11 +64,11 @@ function drop(e) {
 
     // display the draggable element
     draggable.classList.remove('hide');
-    if (turn == true){
-        turn = false;
-    }
-    else{
-        turn = true
-    }
+    
+    turn = !turn;
+    evalTurn();
+
     console.log(turn)
 }
+
+evalTurn();
