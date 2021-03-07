@@ -5,32 +5,36 @@ const item = document.getElementById('item');
 const item2 = document.getElementById('item2');
 
 
-item.addEventListener('dragstart', dragStart);
-item2.addEventListener('dragstart', dragStart);
-
-function evalTurn() {
-
-    if (turn) {
-        item.setAttribute("draggable", "true");
-        item2.setAttribute("draggable", "false");
-    } else {
-        item.setAttribute("draggable", "false");
-        item2.setAttribute("draggable", "true");
-    }
-
-}
+item.addEventListener('dragstart', dragStartyellow);
+item2.addEventListener('dragstart', dragStartred);
 
 console.log(item);
 console.log(item2);
-function dragStart(e) {
-    console.log(e)
+function dragStartyellow(e) {
+    console.log(e);
+    if(turn){
     console.log('drag starts...');
     e.dataTransfer.setData('text/plain', e.target.id);
     setTimeout(() => {
         e.target.classList.add('hide');
     }, 0);
+    }
+    else {
+    }
 }
 
+function dragStartred(e) {
+    console.log(e.target);
+    if(!turn){
+    console.log('drag starts...');
+    e.dataTransfer.setData('text/plain', e.target.id);
+    setTimeout(() => {
+        e.target.classList.add('hide');
+    }, 0);
+    }
+    else {
+    }
+}
 const boxes = document.querySelectorAll('.box');
 
 boxes.forEach(box => {
@@ -66,9 +70,6 @@ function drop(e) {
     draggable.classList.remove('hide');
     
     turn = !turn;
-    evalTurn();
 
     console.log(turn)
 }
-
-evalTurn();
